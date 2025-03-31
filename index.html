@@ -376,10 +376,8 @@
                 return str;
             }
             
-            // Generate CSV line with empty placeholders for date columns
+            // Generate CSV line without date columns
             const csvLine = [
-                '',  // Empty placeholder for start_date
-                '',  // Empty placeholder for finish_date
                 escapeCSV(bookName),
                 escapeCSV(author),
                 escapeCSV(language),
