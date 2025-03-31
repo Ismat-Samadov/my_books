@@ -8,9 +8,9 @@ A simple GitHub repository to track books I've read, am currently reading, or pl
 .
 ├── LICENSE
 ├── README.md
+├── favicon.ico
+├── index.html
 └── reading-list.csv
-└── docs/
-    └── index.html
 ```
 
 ## CSV Structure
@@ -19,16 +19,23 @@ The `reading-list.csv` file contains the following columns:
 
 | Column | Description |
 |--------|-------------|
-| `book_id` | Unique identifier for each book |
-| `start_date` | Date when you started reading (YYYY-MM-DD) |
-| `finish_date` | Date when you finished reading (YYYY-MM-DD) |
 | `book_name` | Title of the book |
 | `author` | Author(s) of the book |
 | `language` | Language the book is written in |
-| `pdf_link` | Link to PDF version if available |
 | `physically_exists` | Boolean indicating if you own a physical copy (true/false) |
 | `status` | Reading status (to_read, in_progress, completed, abandoned) |
 | `notes` | Your thoughts, quotes, or anything noteworthy about the book |
+
+## Sample Data
+
+```
+book_name,author,language,physically_exists,status,notes
+"Stratejik Pazarlama","Harvard Business Review Press",Turkish,true,completed,"interesting book for sales"
+"HBR's 10 Must Reads on Managing People","Harvard Business Review Press",English,true,completed,"bullshit"
+"HBR On Leadership","Harvard Business Review Press",English,true,completed,"bullshit"
+"HBR's 10 Must Reads on Making Smart Decisions","Harvard Business Review Press",English,true,completed,"bullshit"
+"HBR's 10 Must Reads on Teams","Harvard Business Review Press",English,true,completed,"bullshit"
+```
 
 ## How to Use
 
@@ -39,7 +46,7 @@ The `reading-list.csv` file contains the following columns:
 3. Click "Generate CSV Line"
 4. Click "Copy to Clipboard"
 5. Open `reading-list.csv` in your repository
-6. Paste the line at the end of the file and add the next book_id at the beginning
+6. Paste the line at the end of the file
 
 ### Manual Entry
 
@@ -51,12 +58,11 @@ You can also directly edit the `reading-list.csv` file by:
 
 Example CSV entry:
 ```
-1,2023-10-15,2023-11-20,"The Pragmatic Programmer","Andrew Hunt, David Thomas",English,https://example.com/pragmatic.pdf,true,completed,"Great book on software craftsmanship"
+"The Pragmatic Programmer","Andrew Hunt, David Thomas",English,true,completed,"Great book on software craftsmanship"
 ```
 
 ## Format Guidelines
 
-- Use YYYY-MM-DD format for dates
 - Wrap text fields that might contain commas in double quotes
 - Escape double quotes within fields by doubling them
 - Use lowercase for status values: to_read, in_progress, completed, abandoned
@@ -70,15 +76,14 @@ Example CSV entry:
 
 ## Book Entry Form
 
-I've created a simple HTML form to help generate properly formatted CSV lines. You can access it at:
+I've created a simple HTML form to help generate properly formatted CSV lines. The form is included directly in the repository as `index.html` and can be accessed via GitHub Pages at:
 
 https://yourusername.github.io/my_books/
 
 The form includes:
 - Required fields validation
 - Auto-generation of properly escaped CSV
-- Date helpers with "Today" buttons
-- Status auto-suggestions based on dates
+- Language selection (English, Turkish, Azerbaijani, Russian)
 - Copy to clipboard functionality
 - Dark mode interface
 
