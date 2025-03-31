@@ -1,6 +1,6 @@
-start_date,finish_date,book_name,author,language,pdf_link,physically_exists,status,notes
-,,Stratejik Pazarlama,Harvard Business Review Press,Turkish,,true,completed,interesting book for sales
-,,HBR's 10 Must Reads on Managing People,Harvard Business Review Press,English,,true,completed,bullshit
-,,HBR On Leadership,Harvard Business Review Press,English,,true,completed,bullshit
-,,HBR's 10 Must Reads on Making Smart Decisions,Harvard Business Review Press,English,,true,completed,bullshit
-,,HBR's 10 Must Reads on Teams,Harvard Business Review Press,English,,true,completed,bullshit
+start_date,finish_date,book_name,author,language,physically_exists,status,notes
+,,Stratejik Pazarlama,Harvard Business Review Press,Turkish,true,completed,interesting book for sales
+,,HBR's 10 Must Reads on Managing People,Harvard Business Review Press,English,true,completed,bullshit
+,,HBR On Leadership,Harvard Business Review Press,English,true,completed,bullshit
+,,HBR's 10 Must Reads on Making Smart Decisions,Harvard Business Review Press,English,true,completed,bullshit
+,,HBR's 10 Must Reads on Teams,Harvard Business Review Press,English,true,completed,bullshit
