@@ -43,6 +43,10 @@
             background-color: #f6f8fa;
             display: none;
         }
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
@@ -59,10 +63,16 @@
         <input type="text" id="language" value="English">
         
         <label for="start_date">Start Date:</label>
-        <input type="date" id="start_date">
+        <div>
+            <input type="date" id="start_date">
+            <button type="button" id="todayStartBtn" style="padding: 2px 8px; margin-left: 5px;">Today</button>
+        </div>
         
         <label for="finish_date">Finish Date:</label>
-        <input type="date" id="finish_date">
+        <div>
+            <input type="date" id="finish_date">
+            <button type="button" id="todayFinishBtn" style="padding: 2px 8px; margin-left: 5px;">Today</button>
+        </div>
         
         <label for="pdf_link">PDF Link:</label>
         <input type="url" id="pdf_link">
@@ -84,8 +94,9 @@
         <label for="notes" class="full-width">Notes:</label>
         <textarea id="notes" class="full-width"></textarea>
         
-        <div class="full-width">
+        <div class="full-width buttons">
             <button type="button" id="generateBtn">Generate CSV Line</button>
+            <button type="button" id="resetBtn">Reset Form</button>
         </div>
     </form>
     
@@ -96,6 +107,31 @@
     </div>
     
     <script>
+        // Function to set today's date
+        function setToday(elementId) {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            document.getElementById(elementId).value = `${yyyy}-${mm}-${dd}`;
+        }
+        
+        // Today button handlers
+        document.getElementById('todayStartBtn').addEventListener('click', function() {
+            setToday('start_date');
+        });
+        
+        document.getElementById('todayFinishBtn').addEventListener('click', function() {
+            setToday('finish_date');
+        });
+        
+        // Reset form
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            document.getElementById('bookForm').reset();
+            document.getElementById('result').style.display = 'none';
+        });
+        
+        // Generate CSV line
         document.getElementById('generateBtn').addEventListener('click', function() {
             // Get all form values
             const bookName = document.getElementById('book_name').value;
@@ -107,6 +143,12 @@
             const physicallyExists = document.getElementById('physically_exists').value;
             const status = document.getElementById('status').value;
             const notes = document.getElementById('notes').value;
+            
+            // Validate required fields
+            if (!bookName || !author) {
+                alert("Book name and author are required!");
+                return;
+            }
             
             // Function to escape CSV fields properly
             function escapeCSV(field) {
@@ -120,13 +162,8 @@
                 return str;
             }
             
-            // Get the next book ID
-            // In a real implementation, you'd need to read the existing CSV to determine this
-            const bookId = '[NEXT_ID]';
-            
-            // Generate CSV line
+            // Generate CSV line (without book_id)
             const csvLine = [
-                bookId,
                 escapeCSV(startDate),
                 escapeCSV(finishDate),
                 escapeCSV(bookName),
