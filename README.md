@@ -41,7 +41,7 @@ book_name,author,language,physically_exists,status,notes
 
 ### Adding a New Book
 
-1. Visit the [Book Entry Form](https://yourusername.github.io/my_books/) (GitHub Pages)
+1. Visit the [Book Entry Form](https://Ismat-Samadov.github.io/my_books/) (GitHub Pages)
 2. Fill out the book details 
 3. Click "Generate CSV Line"
 4. Click "Copy to Clipboard"
@@ -78,7 +78,7 @@ Example CSV entry:
 
 I've created a simple HTML form to help generate properly formatted CSV lines. The form is included directly in the repository as `index.html` and can be accessed via GitHub Pages at:
 
-https://yourusername.github.io/my_books/
+https://Ismat-Samadov.github.io/my_books/
 
 The form includes:
 - Required fields validation
