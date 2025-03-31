@@ -294,15 +294,20 @@
             
             <div class="form-group">
                 <label for="language"><i class="fas fa-language"></i> Language</label>
-                <input type="text" id="language" value="English" placeholder="Book language">
+                <select id="language">
+                    <option value="English">English</option>
+                    <option value="Turkish">Turkish</option>
+                    <option value="Azerbaijani">Azerbaijani</option>
+                    <option value="Russian">Russian</option>
+                </select>
             </div>
             
             <div class="form-group">
                 <label for="status"><i class="fas fa-tasks"></i> Status</label>
                 <select id="status">
-                    <option value="to_read">To Read</option>
+                    <option value="completed" selected>Completed</option>
                     <option value="in_progress">In Progress</option>
-                    <option value="completed">Completed</option>
+                    <option value="to_read">To Read</option>
                     <option value="abandoned">Abandoned</option>
                 </select>
             </div>
@@ -389,9 +394,8 @@
                 statusSelect.value = 'completed';
             } else if (startDate && !finishDate) {
                 statusSelect.value = 'in_progress';
-            } else if (!startDate && !finishDate) {
-                statusSelect.value = 'to_read';
             }
+            // Don't change to to_read if empty dates to maintain defaults
         }
         
         // Today button handlers
@@ -408,29 +412,11 @@
         // Update dates based on status changes
         document.getElementById('status').addEventListener('change', function() {
             const status = this.value;
-            const today = new Date();
-            const yyyy = today.getFullYear();
-            const mm = String(today.getMonth() + 1).padStart(2, '0');
-            const dd = String(today.getDate()).padStart(2, '0');
-            const todayStr = `${yyyy}-${mm}-${dd}`;
             
-            if (status === 'completed' && !document.getElementById('finish_date').value) {
-                document.getElementById('finish_date').value = todayStr;
-                if (!document.getElementById('start_date').value) {
-                    // If completed but no start date, set a start date 14 days ago
-                    const twoWeeksAgo = new Date();
-                    twoWeeksAgo.setDate(today.getDate() - 14);
-                    const twoWeeksAgoStr = `${twoWeeksAgo.getFullYear()}-${String(twoWeeksAgo.getMonth() + 1).padStart(2, '0')}-${String(twoWeeksAgo.getDate()).padStart(2, '0')}`;
-                    document.getElementById('start_date').value = twoWeeksAgoStr;
-                }
-            } else if (status === 'in_progress' && !document.getElementById('start_date').value) {
-                document.getElementById('start_date').value = todayStr;
+            if (status === 'to_read') {
+                // Clear dates for "to read" status
+                document.getElementById('start_date').value = '';
                 document.getElementById('finish_date').value = '';
-            } else if (status === 'to_read') {
-                // Optionally clear dates for "to read" status
-                // Uncomment if you want to clear dates when status is "to read"
-                // document.getElementById('start_date').value = '';
-                // document.getElementById('finish_date').value = '';
             }
         });
         
@@ -510,8 +496,8 @@
                 { label: 'Author', value: author },
                 { label: 'Language', value: language },
                 { label: 'Status', value: status.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()) },
-                { label: 'Started', value: startDate || 'Not started' },
-                { label: 'Finished', value: finishDate || 'Not finished' },
+                { label: 'Started', value: startDate || 'Not specified' },
+                { label: 'Finished', value: finishDate || 'Not specified' },
                 { label: 'Physical Copy', value: physicallyExists === 'true' ? 'Yes' : 'No' }
             ];
             
