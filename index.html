@@ -329,11 +329,6 @@
             </div>
             
             <div class="form-group">
-                <label for="pdf_link"><i class="fas fa-file-pdf"></i> PDF Link</label>
-                <input type="url" id="pdf_link" placeholder="URL to PDF (optional)">
-            </div>
-            
-            <div class="form-group">
                 <label for="physically_exists"><i class="fas fa-bookmark"></i> Physical Copy</label>
                 <select id="physically_exists">
                     <option value="true">Yes</option>
@@ -447,7 +442,6 @@
             const language = document.getElementById('language').value;
             const startDate = document.getElementById('start_date').value;
             const finishDate = document.getElementById('finish_date').value;
-            const pdfLink = document.getElementById('pdf_link').value;
             const physicallyExists = document.getElementById('physically_exists').value;
             const status = document.getElementById('status').value;
             const notes = document.getElementById('notes').value;
@@ -470,14 +464,13 @@
                 return str;
             }
             
-            // Generate CSV line (without book_id)
+            // Generate CSV line (without book_id and pdf_link)
             const csvLine = [
                 escapeCSV(startDate),
                 escapeCSV(finishDate),
                 escapeCSV(bookName),
                 escapeCSV(author),
                 escapeCSV(language),
-                escapeCSV(pdfLink),
                 escapeCSV(physicallyExists),
                 escapeCSV(status),
                 escapeCSV(notes)
