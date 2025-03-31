@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reading List - Add Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        .full-width {
+            grid-column: span 2;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #0366d6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        textarea {
+            min-height: 80px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f6f8fa;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Book to Reading List</h1>
+    
+    <form id="bookForm">
+        <label for="book_name">Book Name:</label>
+        <input type="text" id="book_name" required>
+        
+        <label for="author">Author:</label>
+        <input type="text" id="author" required>
+        
+        <label for="language">Language:</label>
+        <input type="text" id="language" value="English">
+        
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date">
+        
+        <label for="finish_date">Finish Date:</label>
+        <input type="date" id="finish_date">
+        
+        <label for="pdf_link">PDF Link:</label>
+        <input type="url" id="pdf_link">
+        
+        <label for="physically_exists">Physical Copy:</label>
+        <select id="physically_exists">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        
+        <label for="status">Status:</label>
+        <select id="status">
+            <option value="to_read">To Read</option>
+            <option value="in_progress">In Progress</option>
+            <option value="completed">Completed</option>
+            <option value="abandoned">Abandoned</option>
+        </select>
+        
+        <label for="notes" class="full-width">Notes:</label>
+        <textarea id="notes" class="full-width"></textarea>
+        
+        <div class="full-width">
+            <button type="button" id="generateBtn">Generate CSV Line</button>
+        </div>
+    </form>
+    
+    <div class="result" id="result">
+        <h3>CSV Line:</h3>
+        <pre id="csvOutput"></pre>
+        <p>Copy this line and add it to your reading-list.csv file</p>
+    </div>
+    
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            // Get all form values
+            const bookName = document.getElementById('book_name').value;
+            const author = document.getElementById('author').value;
+            const language = document.getElementById('language').value;
+            const startDate = document.getElementById('start_date').value;
+            const finishDate = document.getElementById('finish_date').value;
+            const pdfLink = document.getElementById('pdf_link').value;
+            const physicallyExists = document.getElementById('physically_exists').value;
+            const status = document.getElementById('status').value;
+            const notes = document.getElementById('notes').value;
+            
+            // Function to escape CSV fields properly
+            function escapeCSV(field) {
+                if (field === undefined || field === null) return '';
+                const str = String(field);
+                // If the field contains quotes, commas, or newlines, it needs to be quoted
+                if (str.includes('"') || str.includes(',') || str.includes('\n')) {
+                    // Double up any quotes within the field
+                    return '"' + str.replace(/"/g, '""') + '"';
+                }
+                return str;
+            }
+            
+            // Get the next book ID
+            // In a real implementation, you'd need to read the existing CSV to determine this
+            const bookId = '[NEXT_ID]';
+            
+            // Generate CSV line
+            const csvLine = [
+                bookId,
+                escapeCSV(startDate),
+                escapeCSV(finishDate),
+                escapeCSV(bookName),
+                escapeCSV(author),
+                escapeCSV(language),
+                escapeCSV(pdfLink),
+                escapeCSV(physicallyExists),
+                escapeCSV(status),
+                escapeCSV(notes)
+            ].join(',');
+            
+            // Display the CSV line
+            document.getElementById('csvOutput').textContent = csvLine;
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

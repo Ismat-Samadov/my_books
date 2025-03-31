@@ -1,0 +1,6 @@
+book_id,start_date,finish_date,book_name,author,language,pdf_link,physically_exists,status,notes
+1,2023-10-15,2023-11-20,"The Pragmatic Programmer","Andrew Hunt, David Thomas",English,https://example.com/pragmatic.pdf,true,completed,"Great book on software craftsmanship, especially liked the DRY principle"
+2,2024-01-05,2024-02-10,"Clean Code","Robert C. Martin",English,https://example.com/cleancode.pdf,false,completed,"Excellent resource for writing maintainable code"
+3,2024-03-01,,,"Design Patterns","Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",English,,true,in_progress,"Learning about Factory and Observer patterns"
+4,2024-02-15,2024-03-20,"Eloquent JavaScript","Marijn Haverbeke",English,https://example.com/eloquentjs.pdf,false,completed,"Good introduction to JS fundamentals"
+5,,,,"The Little Schemer","Daniel P. Friedman, Matthias Felleisen",English,,false,to_read,""
